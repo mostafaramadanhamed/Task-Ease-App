@@ -12,7 +12,7 @@ class OnboardingScreen extends StatelessWidget {
     return  Scaffold(
       body: Column(
         children: [
-          SafeArea(child: Image.asset(Assets.onboardingImage,height:482 ,width: 408,fit: BoxFit.cover,)),
+          SafeArea(minimum: EdgeInsets.only(top: 46.h),child: Image.asset(Assets.onboardingImage,height:482.h ,width: 408.w,fit: BoxFit.cover,),),
           Text("Task Management &\n To-Do List",style: TextStyles.font24SemiBold,textAlign: TextAlign.center,),
           20.ph,
           Text("This productive tool is designed to help \n you better manage your task \n project-wise conveniently!",
