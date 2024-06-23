@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_ease/core/styles/text_styles.dart';
 import 'package:task_ease/core/utils/assets.dart';
 import 'package:task_ease/core/utils/spacing_extension.dart';
+import 'package:task_ease/core/widgets/app_button.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
@@ -17,6 +18,11 @@ class OnboardingScreen extends StatelessWidget {
           20.ph,
           Text("This productive tool is designed to help \n you better manage your task \n project-wise conveniently!",
             style: TextStyles.font14Regular,textAlign: TextAlign.center,),
+          40.ph,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 22.0.w),
+            child: AppTextButton(buttonText: "Let's Start", onPressed: (){}),
+          ),
         ],
       ),
     );
