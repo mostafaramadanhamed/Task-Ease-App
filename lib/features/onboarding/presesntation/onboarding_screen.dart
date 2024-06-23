@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_ease/core/routing/routes.dart';
+import 'package:task_ease/core/routing/routing_extension.dart';
 import 'package:task_ease/core/styles/text_styles.dart';
 import 'package:task_ease/core/utils/assets.dart';
 import 'package:task_ease/core/utils/spacing_extension.dart';
@@ -21,7 +23,9 @@ class OnboardingScreen extends StatelessWidget {
           40.ph,
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 22.0.w),
-            child: AppTextButton(buttonText: "Let's Start", onPressed: (){}),
+            child: AppTextButton(buttonText: "Let's Start", onPressed: (){
+              context.pushReplacementNamed(Routes.homeScreen);
+            }),
           ),
         ],
       ),

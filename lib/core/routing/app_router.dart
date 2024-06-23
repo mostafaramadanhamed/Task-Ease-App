@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_ease/core/routing/routes.dart';
+import 'package:task_ease/features/home/presentation/home_screen.dart';
 import 'package:task_ease/features/onboarding/presesntation/onboarding_screen.dart';
 
 class AppRouter {
@@ -18,7 +19,7 @@ class AppRouter {
         );
         case Routes.homeScreen:
         return MaterialPageRoute(
-          builder: (_) => const Placeholder(),
+          builder: (_) => const HomeScreen(),
         );
         case Routes.addTaskScreen:
         return MaterialPageRoute(

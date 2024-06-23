@@ -15,6 +15,10 @@ abstract class TextStyles{
     color: Colors.white,
     fontSize: 19.sp,
     fontWeight: FontWeightHelper.semiBold,
+  ); static TextStyle font18Bold=TextStyle(
+    color: ColorsManager.kMainColor,
+    fontSize: 18.sp,
+    fontWeight: FontWeightHelper.bold,
   );
 static TextStyle font14Regular=TextStyle(
     color: ColorsManager.kSecondaryColor,
