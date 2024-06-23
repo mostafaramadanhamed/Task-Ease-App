@@ -10,11 +10,11 @@ class AppRouter {
     switch (settings.name) {
       case Routes.initialScreen:
         return MaterialPageRoute(
-          builder: (_) => const OnboardingScreen(),
+          builder: (_) => const Placeholder(),
         );
         case Routes.onBoardingScreen:
         return MaterialPageRoute(
-          builder: (_) => const Placeholder(),
+          builder: (_) => const OnboardingScreen(),
         );
         case Routes.homeScreen:
         return MaterialPageRoute(
