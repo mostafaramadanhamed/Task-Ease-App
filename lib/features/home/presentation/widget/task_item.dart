@@ -1,0 +1,57 @@
+
+
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task_ease/core/utils/spacing_extension.dart';
+
+import '../../../../core/styles/colors.dart';
+import '../../../../core/styles/text_styles.dart';
+
+class TaskItem extends StatelessWidget {
+  const TaskItem({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 18,
+      shadowColor: Colors.grey.shade50,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(24.r)
+      ),
+      child: Padding(
+        padding:EdgeInsets.symmetric(horizontal: 20.w,vertical: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text("Grocery shopping app design",style: TextStyles.font15Medium,),
+                const Spacer(),
+                Container(
+                    height: 36.h,
+                    width: 36.h,
+                    decoration:BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.r),
+                      color: ColorsManager.kPrimaryColor.withOpacity(0.15),
+                    ),
+                    child: Icon(Icons.delete,size: 24.sp,color: ColorsManager.kPrimaryColor,)),
+              ],
+            ),
+            12.ph,
+            Text("Market Research",style: TextStyles.font18SemiBold,),
+            12.ph,
+            Row(
+              children: [
+                Icon(Icons.access_time_filled_rounded,size: 20.sp,color: ColorsManager.kPrimaryLightColor,),
+                8.pw,
+                Text("7:00 PM",style: TextStyles.font11Medium,)
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

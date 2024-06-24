@@ -6,6 +6,7 @@ import 'package:task_ease/core/routing/routing_extension.dart';
 import 'package:task_ease/core/styles/colors.dart';
 import 'package:task_ease/core/styles/text_styles.dart';
 import 'package:task_ease/core/utils/spacing_extension.dart';
+import 'package:task_ease/features/home/presentation/widget/task_item.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -35,8 +36,8 @@ class HomeScreen extends StatelessWidget {
                 headerProps:  EasyHeaderProps(
                   monthPickerType: MonthPickerType.switcher,
                   dateFormatter: const DateFormatter.fullDateDMY(),
-                  selectedDateStyle: TextStyles.font18Bold,
-                  monthStyle: TextStyles.font18Bold,
+                  selectedDateStyle: TextStyles.font18SemiBold,
+                  monthStyle: TextStyles.font18SemiBold,
                 ),
                 dayProps:  EasyDayProps(
                   dayStructure: DayStructure.dayStrDayNum,
@@ -73,6 +74,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              32.ph,
+              const TaskItem(),
             ],
           ),
         ),
