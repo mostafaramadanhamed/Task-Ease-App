@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_ease/core/routing/routes.dart';
 import 'package:task_ease/core/routing/routing_extension.dart';
 import 'package:task_ease/core/styles/colors.dart';
+import 'package:task_ease/core/styles/text_styles.dart';
 import 'package:task_ease/core/utils/spacing_extension.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -31,9 +32,11 @@ class HomeScreen extends StatelessWidget {
                 onDateChange: (selectedDate) {
                   //`selectedDate` the new date selected.
                 },
-                headerProps: const EasyHeaderProps(
+                headerProps:  EasyHeaderProps(
                   monthPickerType: MonthPickerType.switcher,
-                  dateFormatter: DateFormatter.fullDateDMY(),
+                  dateFormatter: const DateFormatter.fullDateDMY(),
+                  selectedDateStyle: TextStyles.font18Bold,
+                  monthStyle: TextStyles.font18Bold,
                 ),
                 dayProps:  EasyDayProps(
                   dayStructure: DayStructure.dayStrDayNum,
