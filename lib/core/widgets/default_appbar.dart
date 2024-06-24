@@ -10,7 +10,7 @@ AppBar buildDefaultAppBar(String title,BuildContext context,{
   return AppBar(
     backgroundColor: Colors.white,
     elevation: 0,
-    title: Text(title, style: TextStyles.font18Bold,),
+    title: Text(title, style: TextStyles.font18SemiBold,),
     centerTitle: true,
     leading: IconButton(
       onPressed: (){

@@ -15,10 +15,15 @@ abstract class TextStyles{
     color: Colors.white,
     fontSize: 19.sp,
     fontWeight: FontWeightHelper.semiBold,
-  ); static TextStyle font18Bold=TextStyle(
+  ); static TextStyle font18SemiBold=TextStyle(
     color: ColorsManager.kMainColor,
     fontSize: 18.sp,
-    fontWeight: FontWeightHelper.bold,
+    fontWeight: FontWeightHelper.semiBold,
+  );
+static TextStyle font15Medium=TextStyle(
+    color: ColorsManager.kSecondaryColor,
+    fontSize: 15.sp,
+    fontWeight: FontWeightHelper.medium,
   );
 static TextStyle font14Regular=TextStyle(
     color: ColorsManager.kSecondaryColor,
@@ -26,10 +31,10 @@ static TextStyle font14Regular=TextStyle(
     fontWeight: FontWeightHelper.regular,
   );
 
-static TextStyle font11Regular=TextStyle(
-    color: ColorsManager.kMainColor,
+static TextStyle font11Medium=TextStyle(
+    color: ColorsManager.kPrimaryLightColor,
     fontSize: 11.sp,
-    fontWeight: FontWeightHelper.regular,
+    fontWeight: FontWeightHelper.medium,
   );
 
 static TextStyle font9Regular=TextStyle(

@@ -25,7 +25,7 @@ class HelloRow extends StatelessWidget {
             ),
             child: Icon(Icons.person_outline_rounded,size: 30.sp,color: ColorsManager.kPrimaryColor,)),
         16.pw,
-        Text("Hello",style: TextStyles.font18Bold,),
+        Text("Hello",style: TextStyles.font18SemiBold,),
         const Spacer(),
         GestureDetector(child: Icon(Icons.notifications_active_outlined,color: ColorsManager.kPrimaryColor,size: 30.sp,)),
       ],
