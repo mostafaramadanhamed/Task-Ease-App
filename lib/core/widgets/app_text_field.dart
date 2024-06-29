@@ -27,19 +27,15 @@ class AppTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
-
       keyboardType: textInputType??TextInputType.text,
       maxLines: maxLine,
       decoration: InputDecoration(
-      constraints: BoxConstraints(
-        minHeight: 63.h,
-      ),
         filled: true,
         fillColor:Colors.white,
         isDense: true,
         contentPadding: contentPadding?? EdgeInsets.symmetric(
-          horizontal:20.w ,
-          vertical: 18.h,
+          horizontal:15.w ,
+          vertical: 15.h,
         ),
         focusedBorder:focusedBorder?? OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.r),
@@ -51,12 +47,14 @@ class AppTextFormField extends StatelessWidget {
         enabledBorder:enabledBorder??  OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.r),
           borderSide:const BorderSide(
-            color: ColorsManager.kPrimaryLightColor,
+            color: Colors.white,
             width: 1.3,
           ),
         ),
         hintStyle:hintStyle?? TextStyles.font14Regular,
+        labelStyle:hintStyle?? TextStyles.font14Regular,
         hintText: hintText,
+        labelText: hintText,
         suffixIcon: suffixIcon,
       ),
       obscureText: isObscureText??false,
