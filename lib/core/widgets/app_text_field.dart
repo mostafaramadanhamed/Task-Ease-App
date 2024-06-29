@@ -11,6 +11,7 @@ class AppTextFormField extends StatelessWidget {
   final TextStyle ? inputTextStyle;
   final TextStyle ? hintStyle;
   final String hintText;
+  final int ? maxLine;
   final TextInputType? textInputType;
   final bool ? isObscureText;
   final Widget ? suffixIcon;
@@ -20,15 +21,19 @@ class AppTextFormField extends StatelessWidget {
     this.contentPadding, this.focusedBorder,
     this.enabledBorder, this.inputTextStyle,
     this.hintStyle, required this.hintText,
-    this.isObscureText, this.suffixIcon, this.backgroundColor, this.textInputType,
+    this.isObscureText, this.suffixIcon, this.backgroundColor, this.textInputType, this.maxLine,
   });
 
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
-      keyboardType: textInputType??TextInputType.text,
 
+      keyboardType: textInputType??TextInputType.text,
+      maxLines: maxLine,
       decoration: InputDecoration(
+      constraints: BoxConstraints(
+        minHeight: 63.h,
+      ),
         filled: true,
         fillColor:Colors.white,
         isDense: true,
@@ -37,14 +42,14 @@ class AppTextFormField extends StatelessWidget {
           vertical: 18.h,
         ),
         focusedBorder:focusedBorder?? OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(15.r),
           borderSide:const BorderSide(
             color: ColorsManager.kPrimaryColor,
             width: 1.3,
           ),
         ),
         enabledBorder:enabledBorder??  OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(15.r),
           borderSide:const BorderSide(
             color: ColorsManager.kPrimaryLightColor,
             width: 1.3,
