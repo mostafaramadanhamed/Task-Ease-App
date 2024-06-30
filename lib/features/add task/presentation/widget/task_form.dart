@@ -8,6 +8,7 @@ import 'package:task_ease/core/widgets/app_button.dart';
 import 'package:task_ease/core/widgets/app_text_field.dart';
 import 'package:task_ease/features/add%20task/data/models/task_model.dart';
 import 'package:task_ease/features/add%20task/logic/add%20task%20cubit/add_task_cubit.dart';
+import 'package:task_ease/features/home/logic/fetch%20task%20cubit/fetch_task_cubit.dart';
 
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
@@ -112,6 +113,7 @@ class _TaskFormState extends State<TaskForm> {
                       projectName: projectNameController.text,
                       description: descriptionController.text, selectedDate: initialDate!, selectedTime: initialTime!.format(context));
                   BlocProvider.of<AddTaskCubit>(context).addTask(taskModel);
+                  BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
                   context.pop();
                 }
                 else{
