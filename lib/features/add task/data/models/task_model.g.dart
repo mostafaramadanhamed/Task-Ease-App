@@ -22,7 +22,7 @@ class TaskModelAdapter extends TypeAdapter<TaskModel> {
       projectName: fields[2] as String,
       description: fields[3] as String,
       selectedDate: fields[4] as DateTime,
-      selectedTime: fields[5] as TimeOfDay,
+      selectedTime: fields[5] as String,
     );
   }
 

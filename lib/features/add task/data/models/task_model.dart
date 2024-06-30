@@ -15,7 +15,7 @@ class TaskModel {
   @HiveField(4)
   final DateTime selectedDate;
   @HiveField(5)
-  final TimeOfDay selectedTime;
+  final String selectedTime;
 
   TaskModel(
       {required this.id,
