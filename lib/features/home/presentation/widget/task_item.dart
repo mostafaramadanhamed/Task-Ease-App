@@ -1,17 +1,14 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_ease/core/utils/spacing_extension.dart';
-
+import 'package:task_ease/features/add%20task/data/models/task_model.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
-
 class TaskItem extends StatelessWidget {
   const TaskItem({
-    super.key,
+    super.key, required this.taskModel,
   });
-
+final TaskModel taskModel;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -27,26 +24,32 @@ class TaskItem extends StatelessWidget {
           children: [
             Row(
               children: [
-                Text("Grocery shopping app design",style: TextStyles.font15Medium,),
+                Text(taskModel.taskGroup,style: TextStyles.font15Medium,),
                 const Spacer(),
-                Container(
-                    height: 36.h,
-                    width: 36.h,
-                    decoration:BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
-                      color: ColorsManager.kPrimaryColor.withOpacity(0.15),
-                    ),
-                    child: Icon(Icons.delete,size: 24.sp,color: ColorsManager.kPrimaryColor,)),
+                GestureDetector(
+                  onTap: (){
+                    taskModel.delete();
+                    ScaffoldMessenger.of(context).showSnackBar( const SnackBar(content: Text("Deleted Successfully")));
+                  },
+                  child: Container(
+                      height: 36.h,
+                      width: 36.h,
+                      decoration:BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: ColorsManager.kPrimaryColor.withOpacity(0.15),
+                      ),
+                      child: Icon(Icons.delete,size: 24.sp,color: ColorsManager.kPrimaryColor,)),
+                ),
               ],
             ),
             12.ph,
-            Text("Market Research",style: TextStyles.font18SemiBold,),
+            Text(taskModel.projectName,style: TextStyles.font18SemiBold,),
             12.ph,
             Row(
               children: [
                 Icon(Icons.access_time_filled_rounded,size: 20.sp,color: ColorsManager.kPrimaryLightColor,),
                 8.pw,
-                Text("7:00 PM",style: TextStyles.font11Medium,)
+                Text(taskModel.selectedTime,style: TextStyles.font11Medium,)
               ],
             )
           ],
