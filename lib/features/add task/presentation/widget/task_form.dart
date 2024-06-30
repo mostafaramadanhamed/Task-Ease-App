@@ -27,8 +27,8 @@ class _TaskFormState extends State<TaskForm> {
   TextEditingController taskGroupController=TextEditingController();
   TextEditingController projectNameController=TextEditingController();
   TextEditingController descriptionController=TextEditingController();
-  DateTime ?initialDate = DateTime.now(); // Default to current date
-  TimeOfDay ?initialTime = TimeOfDay.now(); // Default to current date
+  DateTime? initialDate;// Default to current date
+  TimeOfDay ?initialTime;// Default to current date
 
   Future<DateTime?> selectDate(BuildContext context, Function(DateTime) onDateSelected) async {
     final DateTime? picked = await showDatePicker(
@@ -53,6 +53,12 @@ class _TaskFormState extends State<TaskForm> {
     return picked;
   }
 
+  @override
+  void initState() {
+    super.initState();
+    initialDate = DateTime.now();
+    initialTime=TimeOfDay.now();
+  }
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -79,7 +85,7 @@ class _TaskFormState extends State<TaskForm> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
             leading: const Icon(Icons.calendar_month_sharp, color: ColorsManager.kPrimaryColor),
             title: Text(
-              DateFormat.yMMMEd().format(initialDate ?? DateTime.now()),
+             DateFormat.yMMMEd().format(initialDate!),
               style: TextStyles.font18SemiBold,
             ),
           ),

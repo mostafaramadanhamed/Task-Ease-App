@@ -31,11 +31,11 @@ class _HomeBodyState extends State<HomeBody> {
           DatePickerHorizontal(dateTime: dateTime,onDateChange: (date){
             dateTime=date;
             setState(() {
-
+              print(dateTime);
             });
           },),
           32.ph,
-          const Expanded(child: TaskListview()),
+           Expanded(child: TaskListview(dateTime: dateTime,)),
         ],
       ),
     );
