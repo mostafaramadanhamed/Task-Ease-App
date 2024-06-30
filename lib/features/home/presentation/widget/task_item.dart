@@ -28,12 +28,13 @@ final TaskModel taskModel;
               children: [
                 Text(taskModel.taskGroup,style: TextStyles.font15Medium,),
                 const Spacer(),
-                GestureDetector(
-                  onTap: (){
+                Dismissible(
+                  onDismissed: (dis){
                     taskModel.delete();
                     ScaffoldMessenger.of(context).showSnackBar( const SnackBar(content: Text("Deleted Successfully")));
                     BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
                   },
+                  key: Key(taskModel.id.toString()),
                   child: Container(
                       height: 36.h,
                       width: 36.h,
