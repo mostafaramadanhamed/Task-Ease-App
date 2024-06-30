@@ -29,7 +29,7 @@ class _TaskFormState extends State<TaskForm> {
   TextEditingController descriptionController=TextEditingController();
   DateTime? initialDate;// Default to current date
   TimeOfDay ?initialTime;// Default to current date
-
+bool isTaped=false;
   Future<DateTime?> selectDate(BuildContext context, Function(DateTime) onDateSelected) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -76,6 +76,7 @@ class _TaskFormState extends State<TaskForm> {
             onTap: () async {
               initialDate = await selectDate(context, (date) {
                 setState(() {
+                  isTaped=true;
                   initialDate = date;
                 });
               });
@@ -85,7 +86,7 @@ class _TaskFormState extends State<TaskForm> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
             leading: const Icon(Icons.calendar_month_sharp, color: ColorsManager.kPrimaryColor),
             title: Text(
-             DateFormat.yMMMEd().format(initialDate!),
+            isTaped? DateFormat.yMMMEd().format(initialDate!):"Enter Date",
               style: TextStyles.font18SemiBold,
             ),
           ),
@@ -117,7 +118,9 @@ class _TaskFormState extends State<TaskForm> {
                   var taskModel=TaskModel(id:  hashCode,
                       taskGroup: taskGroupController.text,
                       projectName: projectNameController.text,
-                      description: descriptionController.text, selectedDate: initialDate!, selectedTime: initialTime!.format(context));
+                      description: descriptionController.text,
+                      selectedDate: initialDate!,
+                      selectedTime: initialTime!.format(context));
                   BlocProvider.of<AddTaskCubit>(context).addTask(taskModel);
                   BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
                   context.pop();
