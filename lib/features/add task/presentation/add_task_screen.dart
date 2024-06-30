@@ -93,13 +93,13 @@ Future<TimeOfDay?> selectTime(BuildContext context, Function(TimeOfDay) onTimeSe
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
                 leading: const Icon(Icons.watch_later, color: ColorsManager.kPrimaryColor),
                 title: Text(
-                  DateFormat.Hm(initialTime!.toString()).toString(),
+                initialTime!.format(context),
                   style: TextStyles.font18SemiBold,
                 ),
               ),
               24.ph,
               AppTextButton(buttonText: "Add Project", onPressed:() {
-                print(initialDate);
+
               })
             ],
           ),
