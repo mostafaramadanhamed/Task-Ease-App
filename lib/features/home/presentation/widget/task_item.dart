@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_ease/core/utils/spacing_extension.dart';
 import 'package:task_ease/features/add%20task/data/models/task_model.dart';
+import 'package:task_ease/features/home/logic/fetch%20task%20cubit/fetch_task_cubit.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
 class TaskItem extends StatelessWidget {
@@ -30,6 +32,7 @@ final TaskModel taskModel;
                   onTap: (){
                     taskModel.delete();
                     ScaffoldMessenger.of(context).showSnackBar( const SnackBar(content: Text("Deleted Successfully")));
+                    BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
                   },
                   child: Container(
                       height: 36.h,
