@@ -21,21 +21,27 @@ class DatePickerHorizontal extends StatelessWidget {
         monthStyle: TextStyles.font18SemiBold,
       ),
       dayProps:  EasyDayProps(
-        dayStructure: DayStructure.dayStrDayNum,
+        dayStructure: DayStructure.dayStrDayNumMonth,
         inactiveDayStyle: DayStyle(
+          monthStrStyle: TextStyles.font13Regular,
+          dayStrStyle: TextStyles.font13Regular,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(8)),
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                const Color(0xff8426D6).withOpacity(0.5),
-                const Color(0xff8426D6).withOpacity(0.3),
-                const Color(0xff8426D6).withOpacity(0.2),
+                const Color(0xff8426D6).withOpacity(0.25),
+                const Color(0xff8426D6).withOpacity(0.15),
                 const Color(0xff8426D6).withOpacity(0.1),
-                const Color(0xff8426D6).withOpacity(0.2),
-                const Color(0xff8426D6).withOpacity(0.3),
-                const Color(0xff8426D6).withOpacity(0.5),
+                const Color(0xff8426D6).withOpacity(0.1),
+                const Color(0xff8426D6).withOpacity(0.1),
+                const Color(0xff8426D6).withOpacity(0.1),
+                const Color(0xff8426D6).withOpacity(0.1),
+                const Color(0xff8426D6).withOpacity(0.1),
+                const Color(0xff8426D6).withOpacity(0.15),
+                const Color(0xff8426D6).withOpacity(0.25),
+
               ],
             ),
           ),

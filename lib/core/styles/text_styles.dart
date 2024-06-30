@@ -30,6 +30,11 @@ static TextStyle font14Regular=TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeightHelper.regular,
   );
+static TextStyle font13Regular=TextStyle(
+    color: ColorsManager.kMainColor,
+    fontSize: 13.sp,
+    fontWeight: FontWeightHelper.regular,
+  );
 
 static TextStyle font11Medium=TextStyle(
     color: ColorsManager.kPrimaryLightColor,
