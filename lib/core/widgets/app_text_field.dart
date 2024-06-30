@@ -29,6 +29,13 @@ class AppTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return  TextFormField(
       controller:controller ,
+      validator: (val) {
+        if (val!.isEmpty) {
+          return 'Please enter data';
+        }
+        return null;
+      },
+
       keyboardType: textInputType??TextInputType.text,
       maxLines: maxLine,
       decoration: InputDecoration(
@@ -50,6 +57,13 @@ class AppTextFormField extends StatelessWidget {
           borderRadius: BorderRadius.circular(15.r),
           borderSide:const BorderSide(
             color: Colors.white,
+            width: 1.3,
+          ),
+        ),
+        errorBorder:  OutlineInputBorder(
+          borderRadius: BorderRadius.circular(15.r),
+          borderSide:const BorderSide(
+            color: Colors.red,
             width: 1.3,
           ),
         ),
