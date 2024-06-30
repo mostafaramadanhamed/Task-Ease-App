@@ -1,12 +1,14 @@
-import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:task_ease/core/routing/routing_extension.dart';
 import 'package:task_ease/core/utils/spacing_extension.dart';
 import 'package:task_ease/core/widgets/app_button.dart';
 import 'package:task_ease/core/widgets/app_text_field.dart';
 import 'package:task_ease/core/widgets/default_appbar.dart';
-
+import 'package:task_ease/features/add%20task/data/models/task_model.dart';
+import 'package:task_ease/features/add%20task/logic/add%20task%20cubit/add_task_cubit.dart';
 import '../../../core/styles/colors.dart';
 import '../../../core/styles/text_styles.dart';
 
@@ -19,7 +21,12 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-   DateTime ?initialDate = DateTime.now(); // Default to current date
+  AutovalidateMode autoValidateMode=AutovalidateMode.disabled;
+  final GlobalKey<FormState> formKey =GlobalKey();
+  TextEditingController taskGroupController=TextEditingController();
+  TextEditingController projectNameController=TextEditingController();
+  TextEditingController descriptionController=TextEditingController();
+  DateTime ?initialDate = DateTime.now(); // Default to current date
    TimeOfDay ?initialTime = TimeOfDay.now(); // Default to current date
 
   Future<DateTime?> selectDate(BuildContext context, Function(DateTime) onDateSelected) async {
@@ -48,63 +55,86 @@ Future<TimeOfDay?> selectTime(BuildContext context, Function(TimeOfDay) onTimeSe
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocProvider(
+  create: (context) => AddTaskCubit(),
+  child: Scaffold(
       appBar: buildDefaultAppBar("Add Project", context),
       body:  Padding(
         padding:EdgeInsets.symmetric(horizontal: 22.0.w),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              24.ph,
-              const AppTextFormField(hintText: "Task Group"),
-              24.ph,
-              const AppTextFormField(hintText: "Project Name"),
-              24.ph,
-              const AppTextFormField(hintText: "Description",maxLine: 6,textInputType: TextInputType.multiline,),
-              24.ph,
-              ListTile(
-                onTap: () async {
-                 initialDate = await selectDate(context, (date) {
-                    setState(() {
-                      initialDate = date;
+          child: Form(
+            key: formKey,
+            child: Column(
+              children: [
+                24.ph,
+                 AppTextFormField(hintText: "Task Group",controller: taskGroupController,),
+                24.ph,
+                 AppTextFormField(hintText: "Project Name", controller: projectNameController,),
+                24.ph,
+                 AppTextFormField(hintText: "Description",maxLine: 6,textInputType: TextInputType.multiline, controller: descriptionController,),
+                24.ph,
+                ListTile(
+                  onTap: () async {
+                   initialDate = await selectDate(context, (date) {
+                      setState(() {
+                        initialDate = date;
+                      });
                     });
-                  });
-                },
-                tileColor: Colors.white,
-                splashColor: ColorsManager.kPrimaryLightColor,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
-                leading: const Icon(Icons.calendar_month_sharp, color: ColorsManager.kPrimaryColor),
-                title: Text(
-                  DateFormat.yMMMEd().format(initialDate ?? DateTime.now()),
-                  style: TextStyles.font18SemiBold,
+                  },
+                  tileColor: Colors.white,
+                  splashColor: ColorsManager.kPrimaryLightColor,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
+                  leading: const Icon(Icons.calendar_month_sharp, color: ColorsManager.kPrimaryColor),
+                  title: Text(
+                    DateFormat.yMMMEd().format(initialDate ?? DateTime.now()),
+                    style: TextStyles.font18SemiBold,
+                  ),
                 ),
-              ),
-              24.ph,
-              ListTile(
-                onTap: () async {
-                 initialTime = await selectTime(context, (time) {
-                    setState(() {
-                      initialTime = time;
+                24.ph,
+                ListTile(
+                  onTap: () async {
+                   initialTime = await selectTime(context, (time) {
+                      setState(() {
+                        initialTime = time;
+                      });
                     });
-                  });
-                },
-                tileColor: Colors.white,
-                splashColor: ColorsManager.kPrimaryLightColor,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
-                leading: const Icon(Icons.watch_later, color: ColorsManager.kPrimaryColor),
-                title: Text(
-                initialTime!.format(context),
-                  style: TextStyles.font18SemiBold,
+                  },
+                  tileColor: Colors.white,
+                  splashColor: ColorsManager.kPrimaryLightColor,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
+                  leading: const Icon(Icons.watch_later, color: ColorsManager.kPrimaryColor),
+                  title: Text(
+                  initialTime!.format(context),
+                    style: TextStyles.font18SemiBold,
+                  ),
                 ),
-              ),
-              24.ph,
-              AppTextButton(buttonText: "Add Project", onPressed:() {
+                24.ph,
+                BlocBuilder<AddTaskCubit, AddTaskState>(
+  builder: (context, state) {
+    return AppTextButton(buttonText: "Add Project", onPressed:() {
+      if(formKey.currentState!.validate()){
+        formKey.currentState!.save();
 
-              })
-            ],
+        var taskModel=TaskModel(id:  hashCode,
+            taskGroup: taskGroupController.text,
+            projectName: projectNameController.text,
+            description: descriptionController.text, selectedDate: initialDate!, selectedTime: initialTime!.format(context));
+        BlocProvider.of<AddTaskCubit>(context).addTask(taskModel);
+        context.pop();
+      }
+      else{
+        autoValidateMode=AutovalidateMode.always;
+        setState((){});
+      }
+                });
+  },
+)
+              ],
+            ),
           ),
         ),
       ),
-    );
+    ),
+);
   }
 }
