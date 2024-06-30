@@ -16,17 +16,19 @@ class AppTextFormField extends StatelessWidget {
   final bool ? isObscureText;
   final Widget ? suffixIcon;
   final Color ? backgroundColor;
+  final TextEditingController  controller;
   const AppTextFormField({
     super.key,
     this.contentPadding, this.focusedBorder,
     this.enabledBorder, this.inputTextStyle,
     this.hintStyle, required this.hintText,
-    this.isObscureText, this.suffixIcon, this.backgroundColor, this.textInputType, this.maxLine,
+    this.isObscureText, this.suffixIcon, this.backgroundColor, this.textInputType, this.maxLine, required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
+      controller:controller ,
       keyboardType: textInputType??TextInputType.text,
       maxLines: maxLine,
       decoration: InputDecoration(
