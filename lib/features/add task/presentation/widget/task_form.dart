@@ -77,7 +77,9 @@ bool isTaped=false;
               initialDate = await selectDate(context, (date) {
                 setState(() {
                   isTaped=true;
+                  print(initialDate);
                   initialDate = date;
+
                 });
               });
             },
@@ -112,7 +114,7 @@ bool isTaped=false;
           BlocBuilder<AddTaskCubit, AddTaskState>(
             builder: (context, state) {
               return AppTextButton(buttonText: "Add Project", onPressed:() {
-                if(formKey.currentState!.validate()){
+                if(formKey.currentState!.validate()&& isTaped){
                   formKey.currentState!.save();
 
                   var taskModel=TaskModel(id:  hashCode,

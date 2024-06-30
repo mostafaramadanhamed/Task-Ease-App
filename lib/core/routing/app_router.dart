@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:task_ease/core/routing/routes.dart';
 import 'package:task_ease/features/add%20task/presentation/add_task_screen.dart';
-import 'package:task_ease/features/home/presentation/home_screen.dart';
 import 'package:task_ease/features/onboarding/presesntation/onboarding_screen.dart';
+import '../../features/home/presentation/home_screen.dart';
 
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
