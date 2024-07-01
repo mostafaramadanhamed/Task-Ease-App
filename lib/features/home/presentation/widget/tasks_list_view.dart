@@ -6,8 +6,7 @@ import 'package:task_ease/features/home/logic/fetch%20task%20cubit/fetch_task_cu
 import 'package:task_ease/features/home/presentation/widget/task_item.dart';
 
 class TaskListview extends StatelessWidget {
-  const TaskListview({Key? key, required this.dateTime, required this.tasks, }) : super(key: key);
-  final DateTime dateTime;
+  const TaskListview({Key? key,required this.tasks, }) : super(key: key);
   final List<TaskModel>tasks;
   @override
   Widget build(BuildContext context) {

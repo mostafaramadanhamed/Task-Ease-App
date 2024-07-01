@@ -27,8 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       dateTime=DateTime.now();
     });
-    BlocProvider.of<FetchTaskCubit>(context).tasks?.where((element) => element.selectedDate==dateTime);
-    BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
+   BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
   }
 
   @override
@@ -43,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           context.pushNamed(Routes.addTaskScreen);
-          print(" gh :${DateTime.now()}");
+          debugPrint(" gh :${DateTime.now()}");
         },
         backgroundColor: ColorsManager.kPrimaryColor.withOpacity(0.3),
         elevation: 0,
@@ -63,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 });
               },),
               32.ph,
-              Expanded(child: TaskListview(dateTime: dateTime!, tasks: tasks,)),
+              Expanded(child: TaskListview(tasks: tasks,)),
             ],
           ),
         ),
