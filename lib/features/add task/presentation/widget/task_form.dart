@@ -133,7 +133,8 @@ bool isTaped=false;
                 }
               });
             },
-          )
+          ),
+          24.ph,
         ],
       ),
     );
