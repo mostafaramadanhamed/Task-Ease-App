@@ -18,6 +18,7 @@ class AddTaskScreen extends StatelessWidget {
       body:  Padding(
         padding:EdgeInsets.symmetric(horizontal: 22.0.w),
         child: const SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: TaskForm(),
         ),
       ),
