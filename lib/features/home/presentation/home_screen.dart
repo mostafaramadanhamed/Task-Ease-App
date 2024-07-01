@@ -24,52 +24,66 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      dateTime=DateTime.now();
-    });
-   BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
+    dateTime = DateTime.now();
+    BlocProvider.of<FetchTaskCubit>(context, listen: false).fetchAllTasks();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FetchTaskCubit, FetchTaskState>(
 
-  builder: (context, state) { List<TaskModel>tasks = BlocProvider
-      .of<FetchTaskCubit>(context)
-      .tasks!.where((element) => element.selectedDate==dateTime).toList();
+      builder: (context, state) {
+        if (state is FetchTaskLoading) {
+          return const CircularProgressIndicator();
+        }
+        else if (state is FetchTaskFailure) {
+          return Text(state.error);
+        }
+        else if (state is FetchTaskSuccess) {
+          List<TaskModel>tasks = BlocProvider
+              .of<FetchTaskCubit>(context)
+              .tasks!
+              .where((element) => element.selectedDate == dateTime)
+              .toList();
 
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          context.pushNamed(Routes.addTaskScreen);
-          debugPrint(" gh :${DateTime.now()}");
-        },
-        backgroundColor: ColorsManager.kPrimaryColor.withOpacity(0.3),
-        elevation: 0,
-        child: const Icon(Icons.add_outlined,color: ColorsManager.kPrimaryColor,),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-          child: Column(
-            children: [
-              16.ph,
-              DatePickerHorizontal(dateTime: dateTime!, onDateChange: (date) {
-                dateTime = date;
-                setState(() {
-
-                });
-              },),
-              32.ph,
-              Expanded(child: TaskListview(tasks: tasks,)),
-            ],
-          ),
-        ),
-      ),
+          return Scaffold(
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                context.pushNamed(Routes.addTaskScreen);
+                debugPrint(" gh :${DateTime.now()}");
+              },
+              backgroundColor: ColorsManager.kPrimaryColor.withOpacity(0.3),
+              elevation: 0,
+              child: const Icon(
+                Icons.add_outlined, color: ColorsManager.kPrimaryColor,),
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation
+                .centerFloat,
+            body: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0.w),
+                child: Column(
+                  children: [
+                    16.ph,
+                    DatePickerHorizontal(
+                      dateTime: dateTime!, onDateChange: (date) {
+                      setState(() {
+                        dateTime = date;
+                      });
+                    },),
+                    32.ph,
+                    Expanded(child: TaskListview(tasks: tasks,)),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+        else {
+          return const Text("UN ");
+        }
+      },
     );
-  },
-);
   }
 }
 

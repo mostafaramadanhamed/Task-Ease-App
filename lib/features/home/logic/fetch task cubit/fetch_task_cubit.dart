@@ -8,12 +8,19 @@ part 'fetch_task_state.dart';
 
 class FetchTaskCubit extends Cubit<FetchTaskState> {
   FetchTaskCubit() : super(FetchTaskInitial());
+
   List<TaskModel>?tasks=[];
   var taskBox=Hive.box<TaskModel>(SharedStrings.kTaskBox);
 
-  fetchAllTasks() {
-    tasks =taskBox.values.toList();
-    emit(FetchTaskSuccess());
+ fetchAllTasks() {
+   emit(FetchTaskLoading());
+   try{
+      tasks = taskBox.values.toList();
+      emit(FetchTaskSuccess());
+    }
+    catch(ex){
+     emit(FetchTaskFailure(error: ex.toString()));
+    }
   }
 
 }

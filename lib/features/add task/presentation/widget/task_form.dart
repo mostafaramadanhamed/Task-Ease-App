@@ -110,7 +110,7 @@ bool isTaped=false;
               style: TextStyles.font18SemiBold,
             ),
           ),
-          24.ph,
+          65.ph,
           BlocBuilder<AddTaskCubit, AddTaskState>(
             builder: (context, state) {
               return AppTextButton(buttonText: "Add Project", onPressed:() {

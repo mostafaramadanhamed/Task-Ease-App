@@ -21,7 +21,7 @@ class TaskEaseApp extends StatelessWidget {
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: "Task Ease",
-          initialRoute: Routes.onBoardingScreen,
+          initialRoute: Routes.homeScreen,
           onGenerateRoute: appRouter.generateRoute,
         ),
       ),
