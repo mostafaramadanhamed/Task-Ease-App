@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
               .toList();
 
           return Scaffold(
-            floatingActionButton: FloatingActionButton(
+            floatingActionButton:FloatingActionButton(
               onPressed: () {
                 context.pushNamed(Routes.addTaskScreen);
                 debugPrint(" gh :${DateTime.now()}");
