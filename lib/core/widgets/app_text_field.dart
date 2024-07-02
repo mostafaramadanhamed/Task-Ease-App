@@ -11,6 +11,7 @@ class AppTextFormField extends StatelessWidget {
   final TextStyle ? inputTextStyle;
   final TextStyle ? hintStyle;
   final String hintText;
+  final String ? initialValue;
   final int ? maxLine;
   final TextInputType? textInputType;
   final bool ? isObscureText;
@@ -22,7 +23,7 @@ class AppTextFormField extends StatelessWidget {
     this.contentPadding, this.focusedBorder,
     this.enabledBorder, this.inputTextStyle,
     this.hintStyle, required this.hintText,
-    this.isObscureText, this.suffixIcon, this.backgroundColor, this.textInputType, this.maxLine, required this.controller,
+    this.isObscureText, this.suffixIcon, this.backgroundColor, this.textInputType, this.maxLine, required this.controller, this.initialValue,
   });
 
   @override
@@ -35,7 +36,7 @@ class AppTextFormField extends StatelessWidget {
         }
         return null;
       },
-
+initialValue: initialValue,
       keyboardType: textInputType??TextInputType.text,
       maxLines: maxLine,
       decoration: InputDecoration(

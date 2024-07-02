@@ -13,17 +13,14 @@ class TaskEaseApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => FetchTaskCubit(),
-      child: ScreenUtilInit(
-        designSize: const Size(375, 812),
-        minTextAdapt: true,
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: "Task Ease",
-          initialRoute: Routes.homeScreen,
-          onGenerateRoute: appRouter.generateRoute,
-        ),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: "Task Ease",
+        initialRoute: Routes.homeScreen,
+        onGenerateRoute: appRouter.generateRoute,
       ),
     );
   }
