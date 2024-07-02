@@ -77,7 +77,6 @@ bool isTaped=false;
               initialDate = await selectDate(context, (date) {
                 setState(() {
                   isTaped=true;
-                  print(initialDate);
                   initialDate = date;
 
                 });

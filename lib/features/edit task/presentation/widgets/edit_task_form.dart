@@ -7,7 +7,6 @@ import 'package:task_ease/core/utils/spacing_extension.dart';
 import 'package:task_ease/core/widgets/app_button.dart';
 import 'package:task_ease/core/widgets/app_text_field.dart';
 import 'package:task_ease/features/add%20task/data/models/task_model.dart';
-import 'package:task_ease/features/add%20task/logic/add%20task%20cubit/add_task_cubit.dart';
 import 'package:task_ease/features/home/logic/fetch%20task%20cubit/fetch_task_cubit.dart';
 
 import '../../../../core/styles/colors.dart';
@@ -82,7 +81,6 @@ class _EditTaskFormState extends State<EditTaskForm> {
             onTap: () async {
               initialDate = await selectDate(context, (date) {
                 setState(() {
-                  print(initialDate);
                   initialDate = date;
 
                 });
