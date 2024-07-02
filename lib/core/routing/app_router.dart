@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task_ease/core/routing/routes.dart';
 import 'package:task_ease/features/add%20task/data/models/task_model.dart';
+import 'package:task_ease/features/add%20task/logic/add%20task%20cubit/add_task_cubit.dart';
 import 'package:task_ease/features/add%20task/presentation/add_task_screen.dart';
 import 'package:task_ease/features/edit%20task/presentation/edit_task_screen.dart';
 import 'package:task_ease/features/home/logic/fetch%20task%20cubit/fetch_task_cubit.dart';
@@ -10,7 +11,7 @@ import '../../features/home/presentation/home_screen.dart';
 
 class AppRouter {
 
-Route generateRoute(RouteSettings settings) {
+  Route generateRoute(RouteSettings settings) {
     //this arguments to be passed in any screen like this ( arguments as ClassName )
     switch (settings.name) {
       case Routes.initialScreen:
@@ -23,20 +24,20 @@ Route generateRoute(RouteSettings settings) {
         );
       case Routes.homeScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-              create: (context)=>FetchTaskCubit(),
-              child: const HomeScreen()),
+          builder: (_) =>
+              const HomeScreen(),
         );
       case Routes.addTaskScreen:
         return MaterialPageRoute(
-          builder: (_) => const AddTaskScreen(),
+          builder: (_) =>
+              const AddTaskScreen(),
         );
       case Routes.editTaskScreen:
-        final task=settings.arguments as TaskModel ;
+        final task = settings.arguments as TaskModel;
 
-    return MaterialPageRoute(
+        return MaterialPageRoute(
 
-    builder: (_) =>   EditTaskScreen(task: task,),
+          builder: (_) => EditTaskScreen(task: task,),
         );
       default:
         return MaterialPageRoute(

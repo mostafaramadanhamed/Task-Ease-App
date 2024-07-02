@@ -29,8 +29,9 @@ class _EditTaskFormState extends State<EditTaskForm> {
   TextEditingController projectNameController=TextEditingController();
   TextEditingController descriptionController=TextEditingController();
   DateTime? initialDate;// Default to current date
-  TimeOfDay ?initialTime;// Default to current date
-  bool isTaped=false;
+  TimeOfDay ?initialTime;// Default to current time
+  bool isTape=false;
+  String ? taskGroup,projectName,disc;
   Future<DateTime?> selectDate(BuildContext context, Function(DateTime) onDateSelected) async {
     final DateTime? picked = await showDatePicker(
       context: context,
@@ -55,29 +56,32 @@ class _EditTaskFormState extends State<EditTaskForm> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    initialDate = DateTime.now();
-    initialTime=TimeOfDay.now();
-  }
-  @override
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
       child: Column(
         children: [
           24.ph,
-          AppTextFormField(hintText: "Task Group",controller: taskGroupController,),
+          AppTextFormField(hintText: widget.task.taskGroup ,controller: taskGroupController,onChanged: (val){
+            taskGroup=val;
+          },),
           24.ph,
-          AppTextFormField(hintText: "Project Name", controller: projectNameController,),
+          AppTextFormField( controller: projectNameController,hintText: widget.task.projectName,
+            onChanged: (val){
+              projectName=val;
+            },
+          ),
           24.ph,
-          AppTextFormField(hintText: "Description",maxLine: 6,textInputType: TextInputType.multiline, controller: descriptionController,),
+          AppTextFormField(hintText: "Description",maxLine: 6,textInputType: TextInputType.multiline, controller: descriptionController,
+            onChanged: (val){
+              disc=val;
+            },
+          ),
           24.ph,
           ListTile(
             onTap: () async {
               initialDate = await selectDate(context, (date) {
                 setState(() {
-                  isTaped=true;
                   print(initialDate);
                   initialDate = date;
 
@@ -89,7 +93,7 @@ class _EditTaskFormState extends State<EditTaskForm> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
             leading: const Icon(Icons.calendar_month_sharp, color: ColorsManager.kPrimaryColor),
             title: Text(
-              isTaped? DateFormat.yMMMEd().format(initialDate!):"Enter Date",
+             DateFormat.yMMMEd().format(initialDate??widget.task.selectedDate),
               style: TextStyles.font18SemiBold,
             ),
           ),
@@ -98,6 +102,7 @@ class _EditTaskFormState extends State<EditTaskForm> {
             onTap: () async {
               initialTime = await selectTime(context, (time) {
                 setState(() {
+                  isTape=true;
                   initialTime = time;
                 });
               });
@@ -107,32 +112,23 @@ class _EditTaskFormState extends State<EditTaskForm> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.r)),
             leading: const Icon(Icons.watch_later, color: ColorsManager.kPrimaryColor),
             title: Text(
-              initialTime!.format(context),
+             isTape?initialTime!.format(context): widget.task.selectedTime,
               style: TextStyles.font18SemiBold,
             ),
           ),
           65.ph,
-          BlocBuilder<AddTaskCubit, AddTaskState>(
-            builder: (context, state) {
-              return AppTextButton(buttonText: "Add Project", onPressed:() {
-                if(formKey.currentState!.validate()&& isTaped){
-                  formKey.currentState!.save();
+          AppTextButton(buttonText: "Edit Project", onPressed:() {
 
-                  var taskModel=TaskModel(id:  hashCode,
-                      taskGroup: taskGroupController.text,
-                      projectName: projectNameController.text,
-                      description: descriptionController.text,
-                      selectedDate: initialDate!,
-                      selectedTime: initialTime!.format(context));
-                  BlocProvider.of<AddTaskCubit>(context).addTask(taskModel);
+                  //todo edit tasks data
+                  widget.task.taskGroup=taskGroup ?? widget.task.taskGroup;
+                  widget.task.projectName=projectName ?? widget.task.projectName;
+                  widget.task.description=disc ?? widget.task.description;
+                  widget.task.selectedDate=initialDate ?? widget.task.selectedDate;
+                  isTape?widget.task.selectedTime=initialTime!.format(context):widget.task.selectedTime=widget.task.selectedTime;
+                  widget.task.save();
                   BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
                   context.pop();
-                }
-                else{
-                  autoValidateMode=AutovalidateMode.always;
-                  setState((){});
-                }
-              });
+
             },
           ),
           24.ph,

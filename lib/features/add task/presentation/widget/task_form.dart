@@ -124,7 +124,7 @@ bool isTaped=false;
                       selectedDate: initialDate!,
                       selectedTime: initialTime!.format(context));
                   BlocProvider.of<AddTaskCubit>(context).addTask(taskModel);
-                  BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
+                   BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
                   context.pop();
                 }
                 else{

@@ -11,24 +11,25 @@ class AppTextFormField extends StatelessWidget {
   final TextStyle ? inputTextStyle;
   final TextStyle ? hintStyle;
   final String hintText;
-  final String ? initialValue;
   final int ? maxLine;
   final TextInputType? textInputType;
   final bool ? isObscureText;
   final Widget ? suffixIcon;
   final Color ? backgroundColor;
   final TextEditingController  controller;
+  final void Function(String)? onChanged;
   const AppTextFormField({
     super.key,
     this.contentPadding, this.focusedBorder,
     this.enabledBorder, this.inputTextStyle,
     this.hintStyle, required this.hintText,
-    this.isObscureText, this.suffixIcon, this.backgroundColor, this.textInputType, this.maxLine, required this.controller, this.initialValue,
+    this.isObscureText, this.suffixIcon, this.backgroundColor, this.textInputType, this.maxLine, required this.controller, this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
+      onChanged: onChanged,
       controller:controller ,
       validator: (val) {
         if (val!.isEmpty) {
@@ -36,7 +37,6 @@ class AppTextFormField extends StatelessWidget {
         }
         return null;
       },
-initialValue: initialValue,
       keyboardType: textInputType??TextInputType.text,
       maxLines: maxLine,
       decoration: InputDecoration(
@@ -71,7 +71,7 @@ initialValue: initialValue,
         hintStyle:hintStyle?? TextStyles.font14Regular,
         labelStyle:hintStyle?? TextStyles.font14Regular,
         hintText: hintText,
-        labelText: hintText,
+        //labelText: hintText,
         suffixIcon: suffixIcon,
       ),
       obscureText: isObscureText??false,

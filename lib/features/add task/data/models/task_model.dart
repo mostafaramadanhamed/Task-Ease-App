@@ -4,17 +4,17 @@ part 'task_model.g.dart';
 @HiveType(typeId: 1)
 class TaskModel extends HiveObject{
   @HiveField(0)
-  final int id;
+   int id;
   @HiveField(1)
-  final String taskGroup;
+   String taskGroup;
   @HiveField(2)
-  final String projectName;
+   String projectName;
   @HiveField(3)
-  final String description;
+   String description;
   @HiveField(4)
-  final DateTime selectedDate;
+   DateTime selectedDate;
   @HiveField(5)
-  final String selectedTime;
+   String selectedTime;
 
   TaskModel(
       {required this.id,
