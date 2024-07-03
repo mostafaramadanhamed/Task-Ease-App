@@ -10,6 +10,7 @@ import 'package:task_ease/features/add%20task/data/models/task_model.dart';
 import 'package:task_ease/features/add%20task/logic/add%20task%20cubit/add_task_cubit.dart';
 import 'package:task_ease/features/home/logic/fetch%20task%20cubit/fetch_task_cubit.dart';
 
+import '../../../../core/notification/recieved_notification.dart';
 import '../../../../core/styles/colors.dart';
 import '../../../../core/styles/text_styles.dart';
 
@@ -112,7 +113,7 @@ bool isTaped=false;
           65.ph,
           BlocBuilder<AddTaskCubit, AddTaskState>(
             builder: (context, state) {
-              return AppTextButton(buttonText: "Add Project", onPressed:() {
+              return AppTextButton(buttonText: "Add Project", onPressed:()async {
                 if(formKey.currentState!.validate()&& isTaped){
                   formKey.currentState!.save();
 
@@ -123,8 +124,12 @@ bool isTaped=false;
                       selectedDate: initialDate!,
                       selectedTime: initialTime!.format(context));
                   BlocProvider.of<AddTaskCubit>(context).addTask(taskModel);
-                   BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
+                  BlocProvider.of<FetchTaskCubit>(context).fetchAllTasks();
                   context.pop();
+                  await NotificationHelper.showNotification(taskGroupController.text, projectNameController.text,DateTime(initialDate!.year,
+                    initialDate!.month,initialDate!.day,initialTime!.hour,initialTime!.minute,
+                  ));
+
                 }
                 else{
                   autoValidateMode=AutovalidateMode.always;
